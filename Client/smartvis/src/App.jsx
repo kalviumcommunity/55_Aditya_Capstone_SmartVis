@@ -1,14 +1,12 @@
-
-import './App.css'
+import Home from "./components/Home";
 
 function App() {
 
 
   return (
     <>
-      
-      <h1>Smart<span className='vis'>Vis</span></h1>
-      
+    <Home/>
+            
     </>
   )
 }
