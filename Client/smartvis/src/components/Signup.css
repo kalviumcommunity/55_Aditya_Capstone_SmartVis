@@ -1,0 +1,53 @@
+.form-container{
+    height:400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    background:#0F1035;
+}
+.register{
+    display: flex;
+    margin-top:100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.items{
+    display: flex;
+    align-items: center;
+}
+
+.navbar{
+    display: flex;
+    margin-left:420px;
+    justify-content: center;
+    color: #fff;
+}
+
+input{
+    height: 35px;
+    width:250px;
+}
+
+.sbtn{
+    display: flex;
+    justify-content: center;
+}
+
+.button{
+    color: #fff;
+    background:#525CEB;
+    font-size: 1.2rem;
+    height: 35px;
+    width: 90px;
+}
+
+.e{
+    text-align: center;
+}
+
+form{
+    font-size:1.4rem;
+    color: #fff;
+}
