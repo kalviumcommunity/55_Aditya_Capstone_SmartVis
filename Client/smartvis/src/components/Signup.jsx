@@ -19,7 +19,7 @@ function Signup() {
         event.preventDefault();
 
         try {
-            const response = await axios.post(``, { username, password });
+            const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/signup`, { username, password });
             if (response.status === 200) {
                 console.log('Form submitted successfully');
                 // Optionally handle success here
