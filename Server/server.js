@@ -56,7 +56,7 @@ app.post('/login',async (req,res)=>{
     try{
             const {username,password} = req.body
             const response = await userModel.findOne({username,password})
-            if(!username){
+            if(!response){
                 res.status(500).send("invalid user credentials")
             }
             
