@@ -5,6 +5,10 @@ require('dotenv').config()
 const {Model} = require("./Schema")
 const {userModel} = require("./Meetschema")
 
+var cors = require('cors')
+
+app.use(cors())
+
 app.use(express.json())
 
 let connectionStatus = 'disconnected';
