@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 require('dotenv').config()
 const {Model} = require("./Schema")
+const {userModel} = require("./Meetschema")
 
 app.use(express.json())
 
@@ -31,6 +32,38 @@ app.get('/data',async(req,res)=>{
         console.log(err);
     }
 })
+
+app.post('/signup',async (req,res)=>{
+    try{
+            const user = {
+                username: req.body.username,
+                password: req.body.password
+            }
+
+            const response = await userModel.create(user)
+            res.status(200).send(response)
+    }
+    catch(err){
+        console.log("error:",err)
+    }
+})
+
+app.post('/login',async (req,res)=>{
+    try{
+            const {username,password} = req.body
+            const response = await userModel.findOne({username,password})
+            if(!username){
+                res.status(500).send("invalid user credentials")
+            }
+            
+            res.status(200).send(response)
+    }
+    catch(err){
+        console.log("error:",err)
+    }
+})
+
+
 
 app.get('/',(req,res)=>{
     res.send(connectionStatus)
