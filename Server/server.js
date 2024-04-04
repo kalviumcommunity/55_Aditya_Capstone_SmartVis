@@ -11,7 +11,7 @@ let connectionStatus = 'disconnected';
 
 const startDatabase = async () => {
     try {
-        await mongoose.connect(process.env.URI);
+        await mongoose.connect('mongodb+srv://adiaborhade:admin@cluster0.x34vplz.mongodb.net/database?retryWrites=true&w=majority&appName=Cluster0');
         connectionStatus = "The database has been connected!!";
     } catch (err) {
         console.error("Failed to connect to database");
