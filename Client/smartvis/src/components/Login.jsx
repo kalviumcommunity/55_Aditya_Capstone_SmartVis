@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
+import axios from 'axios';
 import home from "../assets/home.png";
 
 function Login() {
@@ -11,9 +12,25 @@ function Login() {
     const [emailError, setEmailError] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [loginError, setloginError] = useState(' ');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
+
+        try {
+            const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/login`, { username, password });
+            if (response.status === 200) {
+                console.log('Login successful');
+                navigate("/")
+                // Optionally handle success here
+            } else {
+                console.error('Login failed');
+                setloginError('Login failed')
+            }
+        } catch (err) {
+            console.error('An error occurred during the login:', err);
+            setloginError('An error occured during the login')
+        }
 
         let isValid = true;
 
@@ -55,16 +72,16 @@ function Login() {
 
     return (
         <>
-            <nav className='nav'>
+            <div className='nav'>
               <div className="items">
                 <div className="hlogo">
-                    <Link to="/"><img src={home} alt=""  height="80px" className='h'/></Link>
+                <Link to="/" className='abt'><h1 className='logo'><span className='smart'>Smart</span><span className='vis'>Vis</span></h1></Link>
                 </div>
                 <div className="login">
                     <h2>Login Here</h2>
                 </div>
               </div>  
-            </nav>
+            </div>
             <div className="register">
                 <div className="form-container">
                     <form onSubmit={handleSubmit}>

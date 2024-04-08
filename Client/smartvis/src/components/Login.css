@@ -6,6 +6,15 @@
     width: 350px;
     background:#0F1035;
 }
+
+.nav{
+    height: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background:#0F1035;
+}
+
 .register{
     display: flex;
     margin-top:100px;
@@ -20,7 +29,7 @@
 
 .login{
     display: flex;
-    margin-left:620px;
+    margin-left:540px;
     justify-content: center;
     color: #fff;
 }

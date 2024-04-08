@@ -22,7 +22,7 @@ function Signup() {
             const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/signup`, { username, password });
             if (response.status === 200) {
                 console.log('Form submitted successfully');
-                // Optionally handle success here
+                navigate("/")
             } else {
                 console.error('Signup failed');
                 setSignupError('Signup failed')
@@ -74,7 +74,7 @@ function Signup() {
             <nav className='nav'>
               <div className="items">
                 <div className="hlogo">
-                <Link to="/"><img src={home} alt=""  height="80px" className='h'/></Link>
+                <Link to="/" className='abt'><h1 className='logo'><span className='smart'>Smart</span><span className='vis'>Vis</span></h1></Link>
                 </div>
                 <div className="navbar">
                     <h2>Register To Schedule Your First Appointment</h2>
