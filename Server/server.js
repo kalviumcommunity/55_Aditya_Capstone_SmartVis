@@ -45,10 +45,10 @@ app.post('/signup',async (req,res)=>{
             }
 
             const response = await userModel.create(user)
-            res.status(200).send(response)
+            res.status(200).send(response);
     }
     catch(err){
-        console.log("error:",err)
+        console.log("Error in signing up user",err);
     }
 })
 
@@ -63,7 +63,7 @@ app.post('/login',async (req,res)=>{
             res.status(200).send(response)
     }
     catch(err){
-        console.log("error:",err)
+        console.log("Login failed",err);
     }
 })
 
