@@ -24,18 +24,7 @@ const startDatabase = async () => {
     }
 };
 
-app.get('/data',async(req,res)=>{
-    try{
-        console.log(Model)
-        const data = await Model.find();
-        console.log(data);
-        res.status(200).send(data)
-    }
-    catch(err){
-        res.status(500).send(err)
-        console.log(err);
-    }
-})
+
 
 app.post('/signup',async (req,res)=>{
     try{
