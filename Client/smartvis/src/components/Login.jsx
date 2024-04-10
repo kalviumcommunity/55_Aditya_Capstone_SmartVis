@@ -72,7 +72,7 @@ function Login() {
 
     return (
         <>
-            <div className='nav'>
+            <div className='navigation'>
               <div className="items">
                 <div className="hlogo">
                 <Link to="/" className='abt'><h1 className='logo'><span className='smart'>Smart</span><span className='vis'>Vis</span></h1></Link>

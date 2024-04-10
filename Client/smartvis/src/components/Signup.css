@@ -25,6 +25,18 @@
     color: #fff;
 }
 
+.navigation{
+    height: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background:#0F1035;
+}
+
+.navigation{
+    box-shadow: 0 4px 10px 5px grey;
+}
+
 input{
     height: 35px;
     width:250px;

@@ -71,7 +71,7 @@ function Signup() {
 
     return (
         <>
-            <nav className='nav'>
+            <div className='navigation'>
               <div className="items">
                 <div className="hlogo">
                 <Link to="/" className='abt'><h1 className='logo'><span className='smart'>Smart</span><span className='vis'>Vis</span></h1></Link>
@@ -80,7 +80,7 @@ function Signup() {
                     <h2>Register To Schedule Your First Appointment</h2>
                 </div>
               </div>  
-            </nav>
+            </div>
             <div className="register">
                 <div className="form-container">
                     <form onSubmit={handleSubmit}>
