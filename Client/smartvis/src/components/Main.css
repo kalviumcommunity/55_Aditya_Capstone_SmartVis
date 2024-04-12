@@ -1,0 +1,21 @@
+.navigation{
+    height: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background:#0F1035;
+    box-shadow: 0 4px 10px 5px grey;
+}
+
+body{
+    background:#FFECD6;
+}
+
+
+.appoint{
+    margin-top: 40px;
+    margin-left: 80px;
+    height: 550px;
+    width: 600px;
+    background:#0F1035;
+}
