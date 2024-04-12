@@ -21,9 +21,10 @@ function Main() {
                     <form>
 
                         <div className="e">
-                            <label>Company:</label>
+                            <label for='company'>Company:</label>
                             <br />
                             <input
+                                id='company'
                                 type="text"
                                 
                             />
@@ -32,9 +33,10 @@ function Main() {
                         <br />
 
                         <div className="e">
-                            <label>Purpose:</label>
+                            <label for='Purpose'>Purpose:</label>
                             <br />
                             <input
+                                id='Purpose'
                                 type="text"
                                 required
                             />
@@ -43,9 +45,10 @@ function Main() {
                         <br />
 
                         <div className="e">
-                            <label>Host:</label>
+                            <label for='Host'>Host:</label>
                             <br />
                             <input
+                                id='Host'
                                 type="text"
                                 required
                             />
@@ -54,9 +57,10 @@ function Main() {
                         <br />
 
                         <div className="e">
-                            <label>Date and Time:</label>
+                            <label for='Date-Time'>Date and Time:</label>
                             <br />
                             <input
+                                id='Date-Time'
                                 type="datetime-local"
                                 required
                             />
@@ -65,9 +69,10 @@ function Main() {
                         <br />
 
                         <div className="e">
-                            <label>Duration:</label>
+                            <label for='Duration'>Duration:</label>
                             <br />
                             <input
+                                id='Duration'
                                 type="number"
                                 placeholder='duration in minutes'
                                 required

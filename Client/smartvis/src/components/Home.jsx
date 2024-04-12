@@ -23,7 +23,7 @@ function Home() {
             <p>Welcome to SmartVis Visitor Management System, your gateway to effortless security and seamless experiences. Our platform streamlines visitor registration and check-in processes, enhancing security measures and providing a smooth journey for all guests. A visitor management system efficiently handles visitor data, tracks visitor movements, issues badges, and notifies hosts upon arrival. It ensures compliance,improves efficiency, and enhances overall safety within your premises.</p>
           </div>
           <div className="homeimage">
-            <img src='https://img1.wsimg.com/isteam/ip/c62e634c-020a-4133-b25c-b8d6b108cf40/pexels-photo-518244.jpeg/:/rs=w:1280,h:853' height="400px"></img>
+            <img src='https://img1.wsimg.com/isteam/ip/c62e634c-020a-4133-b25c-b8d6b108cf40/pexels-photo-518244.jpeg/:/rs=w:1280,h:853' height="400px" alt='visitors-in-company'></img>
           </div>
        </div> 
       <div className="start">

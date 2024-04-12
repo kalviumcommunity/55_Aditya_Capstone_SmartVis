@@ -4,15 +4,13 @@
     display: flex;
     align-items: center;
     background:#0F1035;
+    box-shadow: 0 4px 10px 5px grey;
 }
 
 body{
     background:#FFECD6;
 }
 
-.navigation{
-    box-shadow: 0 4px 10px 5px grey;
-}
 
 .appoint{
     margin-top: 40px;

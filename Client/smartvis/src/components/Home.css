@@ -8,6 +8,11 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-bg-color: #FFECD6;
+    
+}
+
 .navigation{
     box-shadow: 0 4px 10px 5px grey;
 }
@@ -66,7 +71,7 @@ button{
 }
 
 .introduction{
-    background:#FFECD6;
+    background: var(--primary-bg-color);
     height: 100vh;
     width: 100%;
 }
