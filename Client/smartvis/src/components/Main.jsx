@@ -86,21 +86,21 @@ function Main() {
                     </form>
                 </div>
 
-                <div className="visits">
+                <div className="visit">
                     <div className="close-btn"><img src="https://cdn-icons-png.flaticon.com/128/6276/6276642.png" alt="" height="50px" /></div>
                     <div className="upcoming">
-                        <div className="visits-to-come"><h1>Upcoming Visits</h1></div>
-                        <input type="text" className='visitors'/><br /><br />
+                        <div className="visit-to-come"><h1>Upcoming Visits</h1></div>
+                        <input type="text" className='visitor'/><br /><br />
                         <div className="btns">
                             <button className='update'>Update</button>
                             <button className='cancel'>Cancel</button>
                         </div>
-                        <input type="text" className='visitors'/><br /><br />
+                        <input type="text" className='visitor'/><br /><br />
                         <div className="btns">
                             <button className='update'>Update</button>
                             <button className='cancel'>Cancel</button>
                         </div>
-                        <input type="text" className='visitors'/><br /><br />
+                        <input type="text" className='visitor'/><br /><br />
                         <div className="btns">
                             <button className='update'>Update</button>
                             <button className='cancel'>Cancel</button>
