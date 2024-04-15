@@ -25,17 +25,16 @@
     color: #fff;
 }
 
-.navigation{
+.SignupNav{
     height: 120px;
     width: 100%;
     display: flex;
     align-items: center;
     background:#0F1035;
+    box-shadow: 0 4px 10px 5px grey;
+
 }
 
-.navigation{
-    box-shadow: 0 4px 10px 5px grey;
-}
 
 input{
     height: 35px;

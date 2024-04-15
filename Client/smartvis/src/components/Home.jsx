@@ -5,7 +5,7 @@ function Home() {
 
   return (
     <>
-      <div className='navigation'>
+      <div className='homeNav'>
         <div className="navlogo">
           <h1 className='logo'><span className='smart'>Smart</span><span className='vis'>Vis</span></h1>
         </div>

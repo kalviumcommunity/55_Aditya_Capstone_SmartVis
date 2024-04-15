@@ -7,16 +7,18 @@
     background:#0F1035;
 }
 
-.navigation{
+body{
+    background: #FFECD6;
+}
+
+.LoginNav{
     height: 120px;
     width: 100%;
     display: flex;
     align-items: center;
     background:#0F1035;
-}
-
-.navigation{
     box-shadow: 0 4px 10px 5px grey;
+
 }
 
 .register{
