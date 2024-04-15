@@ -5,7 +5,7 @@ import "./Main.css";
 function Main() {
     return (
         <>
-            <div className='navigation'>
+            <div className='MainNav'>
                 <div className="items">
                     <div className="hlogo">
                         <Link to="/" className='abt'><h1 className='logo'><span className='smart'>Smart</span><span className='vis'>Vis</span></h1></Link>
@@ -84,6 +84,28 @@ function Main() {
                             <button type="submit" className="button">Submit</button>
                         </div>
                     </form>
+                </div>
+
+                <div className="visit">
+                    <div className="close-btn"><img src="https://cdn-icons-png.flaticon.com/128/6276/6276642.png" alt="" height="50px" /></div>
+                    <div className="upcoming">
+                        <div className="visit-to-come"><h1>Upcoming Visits</h1></div>
+                        <input type="text" className='visitor'/><br /><br />
+                        <div className="btns">
+                            <button className='update'>Update</button>
+                            <button className='cancel'>Cancel</button>
+                        </div>
+                        <input type="text" className='visitor'/><br /><br />
+                        <div className="btns">
+                            <button className='update'>Update</button>
+                            <button className='cancel'>Cancel</button>
+                        </div>
+                        <input type="text" className='visitor'/><br /><br />
+                        <div className="btns">
+                            <button className='update'>Update</button>
+                            <button className='cancel'>Cancel</button>
+                        </div>
+                    </div>
                 </div>
                 
             </div>

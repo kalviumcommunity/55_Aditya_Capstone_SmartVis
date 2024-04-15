@@ -1,10 +1,10 @@
-body{
-    color: white;
-}
+
 .abt-logo{
     height: 120px;
     display: flex;
     background: #0F1035;
+    box-shadow: 0 4px 10px 5px grey;
+    position: sticky;
 }
 
 .navlogo{
@@ -33,7 +33,8 @@ body{
 }
 
 .aboutus-container{
-    margin-top: 20px;
+    height: 100vh;
+    background: #FFECD6;
     display: flex;
     justify-content: space-evenly;
 }
