@@ -33,7 +33,7 @@ app.get('/data',async(req,res)=>{
     }
     catch(err){
         res.status(500).send(err)
-        console.log(err);
+        console.log("Error in fetching data");
     }
 })
 

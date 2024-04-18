@@ -16,8 +16,20 @@ function Main() {
         fetchSubmittedValues();
     }, []);
 
+
+    const isValidId = (id) => {
+        
+        return /^[a-zA-Z0-9]+$/.test(id); 
+    };
+
     const fetchSubmittedValues = async (id) => {
         try {
+
+            if (!isValidId(id)) {
+                console.error('Invalid id parameter');
+                return; 
+            }
+    
             const response = await axios.get(`https://five5-aditya-capstone-smartvis.onrender.com/visitor/${id}`);
             if (response.status === 200) {
                 setSubmittedValues([response.data]);
@@ -36,7 +48,13 @@ function Main() {
             const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`, { Purpose, Duration, WithWhom, TimeDate, Company });
             if (response.status === 200) {
                 console.log('Form submitted successfully');
-                fetchSubmittedValues(response.data._id);
+                
+                
+                if (response.data && response.data._id) {
+                    fetchSubmittedValues(response.data._id);
+                } else {
+                    console.error('Error: response.data does not contain _id property');
+                }
             } else {
                 console.error('User entry failed');
             }
@@ -44,6 +62,7 @@ function Main() {
             console.error('User entry not created', err);
         }
     }
+    
 
     const handleUpdate = async (id) => {
         try {
