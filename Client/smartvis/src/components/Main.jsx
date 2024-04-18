@@ -1,35 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import "./Main.css";
 import Signup from './Signup';
 
-const [Purpose, setPurpose] = useState('');
-const [Duration, setDuration] = useState('');
-const [WithWhom, setWithWhom] = useState('');
-const [TimeDate, setTimeDate] = useState('');
-const [Company, setCompany] = useState('');
-
-
-const handleSubmit = async(event) => {
-    event.preventDefault();
-
-    try {
-        const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`, { Purpose, Duration, WithWhom, TimeDate, Company });
-        if (response.status === 200) {
-            console.log('Form submitted successfully');
-            navigate("/")
-        } else {
-            console.error('Signup failed');
-            setSignupError('Signup failed')
-        }
-    } catch (err) {
-        console.error('An error occurred during the signup:', err);
-        setSignupError('An error occured during the signup')
-    }
-}
-
-
 function Main() {
+    const [Purpose, setPurpose] = useState('');
+    const [Duration, setDuration] = useState('');
+    const [WithWhom, setWithWhom] = useState('');
+    const [TimeDate, setTimeDate] = useState('');
+    const [Company, setCompany] = useState('');
+    const [submittedValues, setSubmittedValues] = useState(null);
+
+    useEffect(() => {
+        fetchSubmittedValues();
+    }, []);
+
+    const fetchSubmittedValues = async () => {
+        try {
+            const response = await axios.get('https://five5-aditya-capstone-smartvis.onrender.com/visitor');
+            if (response.status === 200) {
+                setSubmittedValues(response.data);
+            } else {
+                console.error('Failed to fetch submitted values');
+            }
+        } catch (err) {
+            console.error('Error fetching submitted values', err);
+        }
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        
+        try {
+            const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`, { Purpose, Duration, WithWhom, TimeDate, Company });
+            if (response.status === 200) {
+                console.log('Form submitted successfully');
+                fetchSubmittedValues();
+            } else {
+                console.error('User entry failed');
+            }
+        } catch (err) {
+            console.error('User entry not created', err);
+        }
+    }
+
+    const handleUpdate = async (id) => {
+        try {
+            const response = await axios.put(`https://five5-aditya-capstone-smartvis.onrender.com/visitorUpdate/${id}`, { Purpose, Duration, WithWhom, TimeDate, Company });
+            if (response.status === 200) {
+                console.log('Entity updated successfully');
+                fetchSubmittedValues();
+            } else {
+                console.error('Failed to update entity');
+            }
+        } catch (err) {
+            console.error('Error updating entity', err);
+        }
+    }
+
     return (
         <>
             <div className='MainNav'>
@@ -46,23 +75,21 @@ function Main() {
             <div className="schedule">
                 <div className="appoint">
                     <form onSubmit={handleSubmit}>
-
                         <div className="e">
-                            <label for='company'>Company:</label>
+                            <label htmlFor='company'>Company:</label>
                             <br />
                             <input
                                 id='company'
                                 type="text"
                                 value={Company}
                                 onChange={(e) => setCompany(e.target.value)}
-                                
                             />
                             <span className="error"></span>
                         </div>
                         <br />
 
                         <div className="e">
-                            <label for='Purpose'>Purpose:</label>
+                            <label htmlFor='Purpose'>Purpose:</label>
                             <br />
                             <input
                                 id='Purpose'
@@ -76,7 +103,7 @@ function Main() {
                         <br />
 
                         <div className="e">
-                            <label for='Host'>Host:</label>
+                            <label htmlFor='Host'>Host:</label>
                             <br />
                             <input
                                 id='Host'
@@ -90,7 +117,7 @@ function Main() {
                         <br />
 
                         <div className="e">
-                            <label for='Date-Time'>Date and Time:</label>
+                            <label htmlFor='Date-Time'>Date and Time:</label>
                             <br />
                             <input
                                 id='Date-Time'
@@ -104,7 +131,7 @@ function Main() {
                         <br />
 
                         <div className="e">
-                            <label for='Duration'>Duration:</label>
+                            <label htmlFor='Duration'>Duration:</label>
                             <br />
                             <input
                                 id='Duration'
@@ -124,25 +151,16 @@ function Main() {
                 </div>
 
                 <div className="visit">
-                    <div className="close-btn"><img src="https://cdn-icons-png.flaticon.com/128/6276/6276642.png" alt="" height="50px" /></div>
-                    <div className="upcoming">
-                        <div className="visit-to-come"><h1>Upcoming Visits</h1></div>
-                        <input type="text" className='visitor'/><br /><br />
-                        <div className="btns">
-                            <button className='update'>Update</button>
-                            <button className='cancel'>Cancel</button>
+                    {submittedValues && submittedValues.map((item, index) => (
+                        <div key={index}>
+                            <input type="text" value={item.Company} onChange={(e) => setCompany(e.target.value)} />
+                            <input type="text" value={item.Purpose} onChange={(e) => setPurpose(e.target.value)} />
+                            <input type="text" value={item.WithWhom} onChange={(e) => setWithWhom(e.target.value)} />
+                            <input type="datetime-local" value={item.TimeDate} onChange={(e) => setTimeDate(e.target.value)} />
+                            <input type="number" value={item.Duration} onChange={(e) => setDuration(e.target.value)} />
+                            <button onClick={() => handleUpdate(item._id)}>Update</button>
                         </div>
-                        <input type="text" className='visitor'/><br /><br />
-                        <div className="btns">
-                            <button className='update'>Update</button>
-                            <button className='cancel'>Cancel</button>
-                        </div>
-                        <input type="text" className='visitor'/><br /><br />
-                        <div className="btns">
-                            <button className='update'>Update</button>
-                            <button className='cancel'>Cancel</button>
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 
             </div>
@@ -151,6 +169,3 @@ function Main() {
 }
 
 export default Main;
-
-
-
