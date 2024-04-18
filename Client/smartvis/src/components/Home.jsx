@@ -70,6 +70,29 @@ function Home() {
           </div>
       </div>
 
+      <footer className='Home-footer'>
+        <div className="foot-container">
+          <div className="tagline">
+            <h1 className='logo'><span className='smart-logo'>Smart</span><span className='vis'>Vis</span></h1>
+            <h3 className='arrival'>Where every arrival counts</h3>
+          </div>
+          <div className="Contact-us">
+            <h1>Contact Us</h1><br />
+            <h3>Mobile: 9172510711</h3>
+            <h3>Email: Smartvis@gmail.com</h3>
+          </div>
+          <div className="Social">
+            <h1> Social Accounts</h1>
+            <img src="https://cdn-icons-png.flaticon.com/128/15713/15713420.png" alt=""  height="50px" className='instagram'/><br />
+            <img src="https://cdn-icons-png.flaticon.com/128/5968/5968764.png" alt="" height="50px" className='facebook' /><br />
+            <img src="https://cdn-icons-png.flaticon.com/128/3536/3536505.png" alt="" height="50px" className='linkedin' />
+          </div>
+        </div>
+        <div className="endline">
+          <div>2024 SmartVis ESOLUTIONS PVT.LTD.All Rights Reserved</div>
+        </div>
+      </footer>
+
 
     </>
   )

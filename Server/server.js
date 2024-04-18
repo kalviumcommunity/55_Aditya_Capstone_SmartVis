@@ -67,6 +67,37 @@ app.post('/login',async (req,res)=>{
     }
 })
 
+app.post('/visitor',async (req,res)=>{
+    try{
+            const visitor = {
+                Purpose: req.body.Purpose,
+                WithWhom: req.body.WithWhom,
+                TimeDate: req.body.TimeDate,
+                Company: req.body.Company,
+                Duration:req.body.Duration
+            }
+
+            const response = await Model.create(visitor)
+            res.status(200).send(response);
+    }
+    catch(err){
+        console.log("Error in creating entry",err);
+    }
+})
+
+
+app.put('/update/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const newData = req.body; 
+        const updatedData = await Model.findByIdAndUpdate(id, newData, { new: true });
+        res.status(200).send(updatedData);
+    } catch (err) {
+        res.status(500).send("Failed to update data");
+        console.log(err);
+    }
+});
+
 
 
 app.get('/',(req,res)=>{
