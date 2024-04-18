@@ -1,6 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./Main.css";
+import Signup from './Signup';
+
+const [Purpose, setPurpose] = useState('');
+const [Duration, setDuration] = useState('');
+const [WithWhom, setWithWhom] = useState('');
+const [TimeDate, setTimeDate] = useState('');
+const [Company, setCompany] = useState('');
+
+
+const handleSubmit = async(event) => {
+    event.preventDefault();
+
+    try {
+        const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`, { Purpose, Duration, WithWhom, TimeDate, Company });
+        if (response.status === 200) {
+            console.log('Form submitted successfully');
+            navigate("/")
+        } else {
+            console.error('Signup failed');
+            setSignupError('Signup failed')
+        }
+    } catch (err) {
+        console.error('An error occurred during the signup:', err);
+        setSignupError('An error occured during the signup')
+    }
+}
+
 
 function Main() {
     return (
@@ -18,7 +45,7 @@ function Main() {
 
             <div className="schedule">
                 <div className="appoint">
-                    <form>
+                    <form onSubmit={handleSubmit}>
 
                         <div className="e">
                             <label for='company'>Company:</label>
@@ -26,6 +53,8 @@ function Main() {
                             <input
                                 id='company'
                                 type="text"
+                                value={Company}
+                                onChange={(e) => setCompany(e.target.value)}
                                 
                             />
                             <span className="error"></span>
@@ -38,6 +67,8 @@ function Main() {
                             <input
                                 id='Purpose'
                                 type="text"
+                                value={Purpose}
+                                onChange={(e) => setPurpose(e.target.value)}
                                 required
                             />
                             <span className="error"></span>
@@ -50,7 +81,9 @@ function Main() {
                             <input
                                 id='Host'
                                 type="text"
-                                required
+                                value={WithWhom}
+                                onChange={(e) => setWithWhom(e.target.value)}
+                                required 
                             />
                             <span className="error"></span>
                         </div>
@@ -62,6 +95,8 @@ function Main() {
                             <input
                                 id='Date-Time'
                                 type="datetime-local"
+                                value={TimeDate}
+                                onChange={(e) => setTimeDate(e.target.value)}
                                 required
                             />
                             <span className="error"></span>
@@ -75,6 +110,8 @@ function Main() {
                                 id='Duration'
                                 type="number"
                                 placeholder='duration in minutes'
+                                value={Duration}
+                                onChange={(e) => setDuration(e.target.value)}
                                 required
                             />
                             <span className="error"></span>

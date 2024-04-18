@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const testSchema = mongoose.Schema({
-    Name: String,
-    Email: String,
+    Company: String,
+    Purpose: String,
     WithWhom: String,
-    TimeDate: Date,
-    Company: String
+    TimeDate: String,
+    Duration: Number,
 });
 const Model = mongoose.model("details", testSchema);
 module.exports = {Model};
