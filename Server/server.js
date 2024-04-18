@@ -85,6 +85,31 @@ app.post('/visitor',async (req,res)=>{
     }
 })
 
+app.get('/visitor/:id',async (req,res)=>{
+    try {
+        const id = req.params.id;
+        const visitor = await Model.findById({_id:id});
+        res.status(200).send(visitor)
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.put('/visitorUpdate/:id',async (req,res)=>{
+    try{    
+            const id = req.params.id
+            const response = await Model.findByIdAndUpdate({_id:id},{
+                WithWhom: req.body.WithWhom,
+                TimeDate: req.body.TimeDate
+            })
+            res.status(200).send(response);
+    }
+    catch(err){
+        console.log("Error in creating entry",err);
+    }
+})
+
 
 app.put('/update/:id', async (req, res) => {
     try {
