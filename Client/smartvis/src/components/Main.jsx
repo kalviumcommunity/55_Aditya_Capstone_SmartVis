@@ -16,11 +16,23 @@ function Main() {
         fetchSubmittedValues();
     }, []);
 
-    const fetchSubmittedValues = async () => {
+
+    const isValidId = (id) => {
+        
+        return /^[a-zA-Z0-9]+$/.test(id); 
+    };
+
+    const fetchSubmittedValues = async (id) => {
         try {
-            const response = await axios.get('https://five5-aditya-capstone-smartvis.onrender.com/visitor');
+
+            if (!isValidId(id)) {
+                console.error('Invalid id parameter');
+                return; 
+            }
+    
+            const response = await axios.get(`https://five5-aditya-capstone-smartvis.onrender.com/visitor/${id}`);
             if (response.status === 200) {
-                setSubmittedValues(response.data);
+                setSubmittedValues([response.data]);
             } else {
                 console.error('Failed to fetch submitted values');
             }
@@ -36,7 +48,13 @@ function Main() {
             const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`, { Purpose, Duration, WithWhom, TimeDate, Company });
             if (response.status === 200) {
                 console.log('Form submitted successfully');
-                fetchSubmittedValues();
+                
+                
+                if (response.data && response.data._id) {
+                    fetchSubmittedValues(response.data._id);
+                } else {
+                    console.error('Error: response.data does not contain _id property');
+                }
             } else {
                 console.error('User entry failed');
             }
@@ -44,13 +62,14 @@ function Main() {
             console.error('User entry not created', err);
         }
     }
+    
 
     const handleUpdate = async (id) => {
         try {
             const response = await axios.put(`https://five5-aditya-capstone-smartvis.onrender.com/visitorUpdate/${id}`, { Purpose, Duration, WithWhom, TimeDate, Company });
             if (response.status === 200) {
                 console.log('Entity updated successfully');
-                fetchSubmittedValues();
+                fetchSubmittedValues(id);
             } else {
                 console.error('Failed to update entity');
             }
@@ -151,13 +170,10 @@ function Main() {
                 </div>
 
                 <div className="visit">
-                    {submittedValues && submittedValues.map((item, index) => (
-                        <div key={index}>
-                            <input type="text" value={item.Company} onChange={(e) => setCompany(e.target.value)} />
-                            <input type="text" value={item.Purpose} onChange={(e) => setPurpose(e.target.value)} />
-                            <input type="text" value={item.WithWhom} onChange={(e) => setWithWhom(e.target.value)} />
+                    {submittedValues && submittedValues.map((item) => (
+                        <div key={item._id}>
+                              <input type="text" value={item.WithWhom} onChange={(e) => setWithWhom(e.target.value)} />
                             <input type="datetime-local" value={item.TimeDate} onChange={(e) => setTimeDate(e.target.value)} />
-                            <input type="number" value={item.Duration} onChange={(e) => setDuration(e.target.value)} />
                             <button onClick={() => handleUpdate(item._id)}>Update</button>
                         </div>
                     ))}

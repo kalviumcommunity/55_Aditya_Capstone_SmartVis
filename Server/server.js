@@ -33,7 +33,7 @@ app.get('/data',async(req,res)=>{
     }
     catch(err){
         res.status(500).send(err)
-        console.log(err);
+        console.log("Error in fetching data");
     }
 })
 
@@ -110,18 +110,6 @@ app.put('/visitorUpdate/:id',async (req,res)=>{
     }
 })
 
-
-app.put('/update/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const newData = req.body; 
-        const updatedData = await Model.findByIdAndUpdate(id, newData, { new: true });
-        res.status(200).send(updatedData);
-    } catch (err) {
-        res.status(500).send("Failed to update data");
-        console.log(err);
-    }
-});
 
 
 
