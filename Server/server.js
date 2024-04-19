@@ -111,19 +111,30 @@ app.put('/visitorUpdate/:id',async (req,res)=>{
     }
 })
 
-app.post('/auth', async(req,res) => {
-    try{const {username,password} = req.body
-    const user = {
-        "username" : username,
-        "password" : password
+app.post('/auth', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username and password are required' });
+        }
+
+        if (username.length < 4 || password.length < 6) {
+            return res.status(400).json({ error: 'Username must be at least 4 characters long and password must be at least 6 characters long' });
+        }
+
+        const user = {
+            "username": username,
+            "password": password
+        };
+
+        const ACCESS_TOKEN = jwt.sign(user, process.env.ACCESS_TOKEN);
+        res.cookie('token', ACCESS_TOKEN, { maxAge: 365 * 24 * 60 * 60 * 1000 });
+        res.json({ "accessToken": ACCESS_TOKEN });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-    const ACCESS_TOKEN = jwt.sign(user,process.env.ACCESS_TOKEN)
-    res.cookie('token',ACCESS_TOKEN,{maxAge:365*24*60*60*1000})
-    res.json({"acsessToken" : ACCESS_TOKEN})
-}catch(err){
-    console.error(err)
-    res.status(500).json({error:'Internal Server Error'})
-}
 });
 
 
