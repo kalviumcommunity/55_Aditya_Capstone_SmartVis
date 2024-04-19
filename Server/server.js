@@ -117,7 +117,7 @@ app.post('/auth', async(req,res) => {
         "username" : username,
         "password" : password
     }
-    const ACCESS_TOKEN = jwt.sign(user,process.env.ACCESS_TOKEN)
+    const ACCESS_TOKEN = jwt.sign(user,fd53388c65ed385e07076171af3a3b3e9b3bab072730ea154bfc992e43c1aaafa976de6f320a3a32cc0c4380afc7a4b64a79395f68eaacff40b945e594dff80e)
     res.cookie('token',ACCESS_TOKEN,{maxAge:365*24*60*60*1000})
     res.json({"acsessToken" : ACCESS_TOKEN})
 }catch(err){
