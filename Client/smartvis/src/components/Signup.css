@@ -63,3 +63,6 @@ form{
     color: #fff;
 }
 
+.google-login{
+   display: flex;
+}
