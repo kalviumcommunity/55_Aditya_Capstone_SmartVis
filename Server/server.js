@@ -7,6 +7,9 @@ const {Model} = require("./Schema")
 const {userModel} = require("./Meetschema")
 
 var cors = require('cors')
+app.use(cors)
+
+var cors = require('cors')
 
 app.use(cors())
 
