@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Signup.css';
 import axios from 'axios';
+
 import home from "../assets/home.png";
 
 function Signup() {
@@ -19,7 +20,7 @@ function Signup() {
         const initGoogleSignIn = () => {
             window.gapi.load('auth2', () => {
                 const auth2 = window.gapi.auth2.init({
-                    client_id: '108309497267-995sgd2rbrm7kg0loduqdsdi42va3rst.apps.googleusercontent.com',
+                    client_id:'108309497267-995sgd2rbrm7kg0loduqdsdi42va3rst.apps.googleusercontent.com',
                     scope: 'email',
                 });
                 setGoogleAuth(auth2); // Store Google Auth instance in state
