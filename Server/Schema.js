@@ -6,6 +6,7 @@ const testSchema = mongoose.Schema({
     WithWhom: String,
     TimeDate: String,
     Duration: Number,
+    
 });
 const Model = mongoose.model("details", testSchema);
 module.exports = {Model};
