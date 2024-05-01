@@ -10,26 +10,24 @@ function Main() {
     const [WithWhom, setWithWhom] = useState('');
     const [TimeDate, setTimeDate] = useState('');
     const [Company, setCompany] = useState('');
+    const [File, setFile] = useState(null); 
     const [submittedValues, setSubmittedValues] = useState(null);
 
     useEffect(() => {
         fetchSubmittedValues();
     }, []);
 
-
     const isValidId = (id) => {
-        
-        return /^[a-zA-Z0-9]+$/.test(id); 
+        return /^[a-zA-Z0-9]+$/.test(id);
     };
 
     const fetchSubmittedValues = async (id) => {
         try {
-
             if (!isValidId(id)) {
                 console.error('Invalid id parameter');
-                return; 
+                return;
             }
-    
+
             const response = await axios.get(`https://five5-aditya-capstone-smartvis.onrender.com/visitor/${id}`);
             if (response.status === 200) {
                 setSubmittedValues([response.data]);
@@ -45,11 +43,28 @@ function Main() {
         event.preventDefault();
         
         try {
-            const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`, { Purpose, Duration, WithWhom, TimeDate, Company });
+            // Check if a file is selected
+            if (!File) {
+                console.error('No file selected');
+                return;
+            }
+    
+            const formData = new FormData();
+            formData.append('Purpose', Purpose);
+            formData.append('Duration', Duration);
+            formData.append('WithWhom', WithWhom);
+            formData.append('TimeDate', TimeDate);
+            formData.append('Company', Company);
+            formData.append('file', File); 
+    
+            const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+    
             if (response.status === 200) {
                 console.log('Form submitted successfully');
-                
-                
                 if (response.data && response.data._id) {
                     fetchSubmittedValues(response.data._id);
                 } else {
@@ -60,13 +75,20 @@ function Main() {
             }
         } catch (err) {
             console.error('User entry not created', err);
+            console.error('Error uploading file:', err);
         }
     }
     
 
     const handleUpdate = async (id) => {
         try {
-            const response = await axios.put(`https://five5-aditya-capstone-smartvis.onrender.com/visitorUpdate/${id}`, { Purpose, Duration, WithWhom, TimeDate, Company });
+            const response = await axios.put(`https://five5-aditya-capstone-smartvis.onrender.com/visitorUpdate/${id}`, {
+                Purpose,
+                Duration,
+                WithWhom,
+                TimeDate,
+                Company
+            });
             if (response.status === 200) {
                 console.log('Entity updated successfully');
                 fetchSubmittedValues(id);
@@ -77,6 +99,32 @@ function Main() {
             console.error('Error updating entity', err);
         }
     }
+
+    const handleFileChange = (event) => {
+        try {
+            const selectedFile = event.target.files[0];
+    
+            
+            const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain', 'image/jpeg', 'image/png'];
+            if (!allowedTypes.includes(selectedFile.type)) {
+                console.error('Unsupported file type');
+                return;
+            }
+    
+            
+            const maxSize = 10 * 1024 * 1024; 
+            if (selectedFile.size > maxSize) {
+                console.error('File size exceeds the limit');
+                return;
+            }
+    
+            
+            setFile(selectedFile);
+        } catch (error) {
+            console.error('Error handling file change:', error);
+        }
+    };
+    
 
     return (
         <>
@@ -129,7 +177,7 @@ function Main() {
                                 type="text"
                                 value={WithWhom}
                                 onChange={(e) => setWithWhom(e.target.value)}
-                                required 
+                                required
                             />
                             <span className="error"></span>
                         </div>
@@ -163,6 +211,20 @@ function Main() {
                             <span className="error"></span>
                         </div>
                         <br />
+
+                        <div className="e">
+                            <label htmlFor='file'>Select File:</label>
+                            <br />
+                            <input
+                                id='file'
+                                type="file"
+                                accept=".pdf,.doc,.docx,.txt,.jpg,.png"
+                                onChange={handleFileChange}
+                            />
+                            <span className="error"></span>
+                        </div>
+                        <br />
+
                         <div className="sbtn">
                             <button type="submit" className="button">Submit</button>
                         </div>
@@ -170,15 +232,16 @@ function Main() {
                 </div>
 
                 <div className="visit">
+                    <h1 className='to-come'>Upcoming Visits</h1>
                     {submittedValues && submittedValues.map((item) => (
                         <div key={item._id}>
-                              <input type="text" value={item.WithWhom} onChange={(e) => setWithWhom(e.target.value)} />
+                            <input type="text" value={item.WithWhom} onChange={(e) => setWithWhom(e.target.value)} />
                             <input type="datetime-local" value={item.TimeDate} onChange={(e) => setTimeDate(e.target.value)} />
                             <button onClick={() => handleUpdate(item._id)}>Update</button>
                         </div>
                     ))}
                 </div>
-                
+
             </div>
         </>
     );
