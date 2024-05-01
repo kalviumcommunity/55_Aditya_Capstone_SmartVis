@@ -10,7 +10,7 @@ function Main() {
     const [WithWhom, setWithWhom] = useState('');
     const [TimeDate, setTimeDate] = useState('');
     const [Company, setCompany] = useState('');
-    const [File, setFile] = useState(null); // State to hold selected file
+    const [File, setFile] = useState(null); 
     const [submittedValues, setSubmittedValues] = useState(null);
 
     useEffect(() => {
@@ -41,24 +41,30 @@ function Main() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        
         try {
+            // Check if a file is selected
+            if (!File) {
+                console.error('No file selected');
+                return;
+            }
+    
             const formData = new FormData();
             formData.append('Purpose', Purpose);
             formData.append('Duration', Duration);
             formData.append('WithWhom', WithWhom);
             formData.append('TimeDate', TimeDate);
             formData.append('Company', Company);
-            formData.append('file', File); // Append selected file to form data
-
+            formData.append('file', File); 
+    
             const response = await axios.post(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+    
             if (response.status === 200) {
                 console.log('Form submitted successfully');
-
                 if (response.data && response.data._id) {
                     fetchSubmittedValues(response.data._id);
                 } else {
@@ -69,8 +75,10 @@ function Main() {
             }
         } catch (err) {
             console.error('User entry not created', err);
+            console.error('Error uploading file:', err);
         }
     }
+    
 
     const handleUpdate = async (id) => {
         try {
@@ -93,9 +101,30 @@ function Main() {
     }
 
     const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        setFile(selectedFile);
+        try {
+            const selectedFile = event.target.files[0];
+    
+            
+            const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain', 'image/jpeg', 'image/png'];
+            if (!allowedTypes.includes(selectedFile.type)) {
+                console.error('Unsupported file type');
+                return;
+            }
+    
+            
+            const maxSize = 10 * 1024 * 1024; 
+            if (selectedFile.size > maxSize) {
+                console.error('File size exceeds the limit');
+                return;
+            }
+    
+            
+            setFile(selectedFile);
+        } catch (error) {
+            console.error('Error handling file change:', error);
+        }
     };
+    
 
     return (
         <>
@@ -203,6 +232,7 @@ function Main() {
                 </div>
 
                 <div className="visit">
+                    <h1 className='to-come'>Upcoming Visits</h1>
                     {submittedValues && submittedValues.map((item) => (
                         <div key={item._id}>
                             <input type="text" value={item.WithWhom} onChange={(e) => setWithWhom(e.target.value)} />

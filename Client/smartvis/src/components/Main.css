@@ -9,7 +9,7 @@
 }
 
 .schedule{
-    height: 85vh;
+    height:100vh;
     background: #FFECD6;
     overflow: hidden;
     display: flex;
@@ -20,7 +20,7 @@
 .appoint{
     margin-top: 40px;
     margin-left: 80px;
-    height: 570px;
+    height: 650px;
     width: 600px;
     background:#0F1035;
 }
@@ -67,4 +67,8 @@
 .close-btn{
     position: absolute;
     right: 10px;
+}
+
+.to-come{
+    color: #fff;
 }
