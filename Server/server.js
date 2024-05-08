@@ -112,6 +112,21 @@ app.put('/visitorUpdate/:id',async (req,res)=>{
     }
 })
 
+
+app.delete('/delete/:id', async (req, res) => {
+    try {
+        const deletedData = await Model.findByIdAndDelete({_id:id}); 
+        if (!deletedData) {
+            return res.status(404).json({ error: 'Data not found' });
+        }
+        console.log('Data deleted:', deletedData);
+        res.status(200).json({ message: 'Data deleted successfully' });
+    } catch (err) {
+        console.error('Error in DELETE request:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.post('/auth', async (req, res) => {
     try {
         const { username, password } = req.body;
