@@ -73,6 +73,7 @@ function Main() {
             } else {
                 console.error('User entry failed');
             }
+            
         } catch (err) {
             console.error('User entry not created', err);
             console.error('Error uploading file:', err);
@@ -104,26 +105,27 @@ function Main() {
         try {
             const selectedFile = event.target.files[0];
     
-            
             const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain', 'image/jpeg', 'image/png'];
             if (!allowedTypes.includes(selectedFile.type)) {
                 console.error('Unsupported file type');
+                alert('Unsupported file type. Please select a PDF, Word document, text file, or image.');
                 return;
             }
     
-            
             const maxSize = 10 * 1024 * 1024; 
             if (selectedFile.size > maxSize) {
                 console.error('File size exceeds the limit');
+                alert('File size exceeds the limit (10MB). Please select a smaller file.');
                 return;
             }
     
-            
             setFile(selectedFile);
         } catch (error) {
             console.error('Error handling file change:', error);
+            alert('An error occurred while handling the file. Please try again.');
         }
     };
+    
     
 
     return (
