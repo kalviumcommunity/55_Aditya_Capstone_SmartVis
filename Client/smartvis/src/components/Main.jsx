@@ -10,8 +10,8 @@ function Main() {
     const [WithWhom, setWithWhom] = useState('');
     const [TimeDate, setTimeDate] = useState('');
     const [Company, setCompany] = useState('');
-    const [File, setFile] = useState(null); 
-    const [submittedValues, setSubmittedValues] = useState(null);
+    const [File, setFile] = useState(null);  
+    const [submittedValues, setSubmittedValues] = useState([]);
 
     useEffect(() => {
         fetchSubmittedValues();
@@ -21,16 +21,11 @@ function Main() {
         return /^[a-zA-Z0-9]+$/.test(id);
     };
 
-    const fetchSubmittedValues = async (id) => {
+    const fetchSubmittedValues = async () => {
         try {
-            if (!isValidId(id)) {
-                console.error('Invalid id parameter');
-                return;
-            }
-
-            const response = await axios.get(`https://five5-aditya-capstone-smartvis.onrender.com/visitor/${id}`);
+            const response = await axios.get(`https://five5-aditya-capstone-smartvis.onrender.com/visitor`);
             if (response.status === 200) {
-                setSubmittedValues([response.data]);
+                setSubmittedValues(response.data.slice(0, 5)); // Store only the latest 5 entries
             } else {
                 console.error('Failed to fetch submitted values');
             }
@@ -65,11 +60,7 @@ function Main() {
     
             if (response.status === 200) {
                 console.log('Form submitted successfully');
-                if (response.data && response.data._id) {
-                    fetchSubmittedValues(response.data._id);
-                } else {
-                    console.error('Error: response.data does not contain _id property');
-                }
+                fetchSubmittedValues(); // Fetch latest entries again
             } else {
                 console.error('User entry failed');
             }
@@ -91,7 +82,7 @@ function Main() {
             });
             if (response.status === 200) {
                 console.log('Entity updated successfully');
-                fetchSubmittedValues(id);
+                fetchSubmittedValues();
             } else {
                 console.error('Failed to update entity');
             }
@@ -100,25 +91,36 @@ function Main() {
         }
     }
 
+    const handleDelete = async (id) => {
+        try {
+            const response = await axios.delete(`https://five5-aditya-capstone-smartvis.onrender.com/delete/${id}`);
+            if (response.status === 200) {
+                console.log('Entry deleted successfully');
+                fetchSubmittedValues(); 
+            } else {
+                console.error('Failed to delete entry');
+            }
+        } catch (err) {
+            console.error('Error deleting entry', err);
+        }
+    }
+
     const handleFileChange = (event) => {
         try {
             const selectedFile = event.target.files[0];
     
-            
             const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain', 'image/jpeg', 'image/png'];
             if (!allowedTypes.includes(selectedFile.type)) {
                 console.error('Unsupported file type');
                 return;
             }
     
-            
             const maxSize = 10 * 1024 * 1024; 
             if (selectedFile.size > maxSize) {
                 console.error('File size exceeds the limit');
                 return;
             }
     
-            
             setFile(selectedFile);
         } catch (error) {
             console.error('Error handling file change:', error);
@@ -233,11 +235,12 @@ function Main() {
 
                 <div className="visit">
                     <h1 className='to-come'>Upcoming Visits</h1>
-                    {submittedValues && submittedValues.map((item) => (
+                    {submittedValues.map((item) => (
                         <div key={item._id}>
-                            <input type="text" value={item.WithWhom} onChange={(e) => setWithWhom(e.target.value)} />
-                            <input type="datetime-local" value={item.TimeDate} onChange={(e) => setTimeDate(e.target.value)} />
+                            <input type="text" value={item.WithWhom} readOnly />
+                            <input type="datetime-local" value={item.TimeDate} readOnly />
                             <button onClick={() => handleUpdate(item._id)}>Update</button>
+                            <button onClick={() => handleDelete(item._id)}>Delete</button>
                         </div>
                     ))}
                 </div>
