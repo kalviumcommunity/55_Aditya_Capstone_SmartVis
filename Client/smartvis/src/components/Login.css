@@ -1,0 +1,68 @@
+.form-container{
+    height:400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    background:#0F1035;
+}
+
+body{
+    background: #FFECD6;
+}
+
+.LoginNav{
+    height: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background:#0F1035;
+    box-shadow: 0 4px 10px 5px grey;
+
+}
+
+.register{
+    display: flex;
+    margin-top:100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.items{
+    display: flex;
+    align-items: center;
+}
+
+.login{
+    display: flex;
+    margin-left:540px;
+    justify-content: center;
+    color: #fff;
+}
+
+input{
+    height: 35px;
+    width:250px;
+}
+
+.sbtn{
+    display: flex;
+    justify-content: center;
+}
+
+.button{
+    color: #fff;
+    background:#525CEB;
+    font-size: 1.2rem;
+    height: 35px;
+    width: 90px;
+}
+
+.e{
+    text-align: center;
+}
+
+form{
+    font-size:1.4rem;
+    color: #fff;
+}

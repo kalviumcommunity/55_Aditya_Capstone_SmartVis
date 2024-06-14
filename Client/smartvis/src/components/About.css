@@ -1,0 +1,67 @@
+
+.abt-logo{
+    height: 120px;
+    display: flex;
+    background: #0F1035;
+    box-shadow: 0 4px 10px 5px grey;
+    position: sticky;
+}
+
+.navlogo{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+}
+
+.aboutsection{
+    margin-left: 8%;
+}
+
+.about-heading{
+    margin-left: 42%;
+    color: white;
+    width: 20vw;
+}
+
+.aboutusinfo{
+    color: #fff;
+    font-size:1.3rem;
+    margin-top:1.5vh;
+    margin-left: 0vw;
+    width: 65vw;
+    text-align: center;
+}
+
+.aboutus-container{
+    height: 100vh;
+    background: #FFECD6;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.description{
+    margin-top:60px;
+    height: 60vh;
+    width: 41vw;
+    color: #fff;
+    background-color: #0F1035;
+}
+
+.title{
+    margin-left: 4px;
+}
+
+.para{
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.data{
+    height:44vh;
+    margin-top: 20px;
+    margin-left:24px; 
+    font-size: 1.4rem;
+    width:38vw;
+    color: #000;
+    background: #fff;
+}

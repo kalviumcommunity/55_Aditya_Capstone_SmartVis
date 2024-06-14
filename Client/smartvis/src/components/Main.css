@@ -1,0 +1,74 @@
+.MainNav{
+    height: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background:#0F1035;
+    box-shadow: 0 4px 10px 5px grey;
+    position: sticky;
+}
+
+.schedule{
+    height:100vh;
+    background: #FFECD6;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.appoint{
+    margin-top: 40px;
+    margin-left: 80px;
+    height: 650px;
+    width: 600px;
+    background:#0F1035;
+}
+
+.visit{
+    height:100vh;
+    width:550px;
+    background:#3887BE;
+    display: flex;
+    justify-content: center;
+}
+
+.visit-to-come{
+    color: #fff;
+}
+
+.upcoming{
+    margin-top: 60px;
+    text-align: center;
+    width: 350px;
+    height: 450px;
+    background: #0F1035;
+}
+
+.visitor{
+    height: 40px;
+    width: 20vw;
+    margin-top: 30px;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.update,.cancel{
+    height: 30px;
+    width: 80px;
+    font-size: 1.1rem;
+    background:#525CEB;
+    color: #fff;
+}
+
+.close-btn{
+    position: absolute;
+    right: 10px;
+}
+
+.to-come{
+    color: #fff;
+}
